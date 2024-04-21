@@ -1,0 +1,36 @@
+{
+  "name": "crud-node-express-mongodb",
+  "version": "0.0.1",
+  "description": "Api Restfull en Node con express y MongoDB",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ceurrutia/ApiRestufulNodeExpressMongo.git",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [
+    "api",
+    "restful",
+    "mongodb",
+    "express",
+    "nodejs"
+  ],
+  "author": "cecilia urrutia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ceurrutia/ApiRestufulNodeExpressMongo/issues"
+  },
+  "homepage": "https://github.com/ceurrutia/ApiRestufulNodeExpressMongo#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "mongoose": "^8.3.2"
+  }
+}
