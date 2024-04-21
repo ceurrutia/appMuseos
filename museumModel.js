@@ -21,7 +21,7 @@ const museumSchema = new Schema({
             required: true
         },
         coordinates: {
-            type: [Number],  // Array de números [longitud, latitud]
+            type: [Number],  // Array de números [longitud primero!!!, latitud]
             required: true
         }
     },

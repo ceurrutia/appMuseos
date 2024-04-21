@@ -1,9 +1,14 @@
 const express = require('express');
+const path = require('path');
 const dbconnect = require('./config');
 const ModelUser = require('./museumModel');
 const app = express();
 
 const router = express.Router();
+
+//Rutas estaticas
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 //Rutas crud// 
@@ -17,7 +22,7 @@ router.get('/museos', async (req, res) => {
 
 
 
-router.get('/museos:id', async (req, res) => {
+router.get('/museos/:id', async (req, res) => {
     const id = req.params.id;
     const respuesta = await ModelUser.findById(id);
     res.send(respuesta)
