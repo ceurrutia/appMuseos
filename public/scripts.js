@@ -1,39 +1,77 @@
-const museosList = document.getElementById('museos-list');
-const agregarForm = document.getElementById('agregar-form');
+document.addEventListener('DOMContentLoaded', function() {
+    fetch('/museos')
+    .then(response => response.json())
+    .then(data => displayMuseos(data))
+    .catch(error => console.error('Error:', error));
+});
 
-// Obtener lista de museos al cargar la página
-window.onload = async () => {
-    await listarMuseos();
-};
-
-// Función para listar museos
-async function listarMuseos() {
-    try {
-        const response = await axios.get('/museos');
-        const museos = response.data;
-        museosList.innerHTML = '';
-        museos.forEach(museo => {
-            const li = document.createElement('li');
-            li.textContent = museo.nombre;
-            museosList.appendChild(li);
-        });
-    } catch (error) {
-        console.error('Error al listar museos:', error);
-    }
+function displayMuseos(museos) {
+    const tbody = document.getElementById('museos-list');
+    tbody.innerHTML = ''; // Limpiar la tabla antes de rellenarla
+    museos.forEach(museo => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${museo.name || ''}</td>
+            <td>${museo.address || ''}</td>
+            <td>${museo.city || ''}</td>
+            <td>${museo.country || ''}</td>
+            <td>${museo.location.coordinates.join(", ")}</td>
+            <td>${museo.day || ''}</td>
+            <td>${museo.hours || ''}</td>
+        `;
+        tbody.appendChild(tr);
+    });
 }
 
-// Manejar el envío del formulario de agregar
-agregarForm.addEventListener('submit', async (event) => {
-    event.preventDefault();
+
+//agregar nuevo museo
+
+document.getElementById('agregar-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
     const nombre = document.getElementById('nombre').value;
-    const latitud = document.getElementById('latitud').value;
-    const longitud = document.getElementById('longitud').value;
-    try {
-        await axios.post('/museos', { nombre, ubicacion: { tipo: 'Point', coordinates: [parseFloat(longitud), parseFloat(latitud)] } });
-        await listarMuseos();
-        // Limpiar el formulario después de agregar
-        agregarForm.reset();
-    } catch (error) {
-        console.error('Error al agregar museo:', error);
-    }
+    const direccion = document.getElementById('direccion').value;
+    const ciudad = document.getElementById('ciudad').value;
+    const pais = document.getElementById('pais').value;
+    const latitud = parseFloat(document.getElementById('latitud').value);
+    const longitud = parseFloat(document.getElementById('longitud').value);
+    const dia = document.getElementById('dia').value;
+    const horas = document.getElementById('horas').value;
+
+    const data = {
+        name: nombre,
+        address: direccion,
+        city: ciudad,
+        country: pais,
+        location: {
+            type: "Point",
+            coordinates: [longitud, latitud]
+        },
+        day: dia,
+        hours: horas
+    };
+
+    fetch('/museos', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+        alert('Museo agregado con éxito!');
+        document.getElementById('agregar-form').reset(); // Optional: clear form after submission
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
 });
+
+//btn limpiar form
+document.getElementById('limpiar-form').addEventListener('click', function() {
+    document.getElementById('agregar-form').reset();
+});
+
+

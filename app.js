@@ -39,7 +39,7 @@ router.post('/museos',  async (req, res)=> {
 
 //PUT
 
-router.put('/museos:id', async (req, res)=>{
+router.put('/museos/:id', async (req, res)=>{
     const body = req.body;
     const id = req.params.id;
     const respuesta = await ModelUser.findOneAndUpdate({_id:id}, body);
