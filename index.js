@@ -4,6 +4,8 @@ const dbconnect = require('./config');
 const ModelUser = require('./museumModel');
 const app = express();
 
+const PORT = process.env.PORT;
+
 const router = express.Router();
 
 //Rutas estaticas
@@ -60,8 +62,8 @@ router.delete('/museos/:id', async (req, res) => {
 app.use(express.json());
 app.use(router);
 
-app.listen(3000, ()=> {
-    console.log("Servidor escuchando en puerto 3000")
+app.listen(process.env.PORT, ()=> {
+    console.log(`Servidor escuchando en puerto ${PORT}`)
 })
 
 dbconnect();
