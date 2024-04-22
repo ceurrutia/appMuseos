@@ -49,7 +49,7 @@ router.put('/museos/:id', async (req, res)=>{
 
 //Delete
 
-router.delete('/museos:id', async (req, res) => {
+router.delete('/museos/:id', async (req, res) => {
     const id = req.params.id;
     const respuesta = await ModelUser.deleteOne({_id: id});
     res.send(respuesta)
