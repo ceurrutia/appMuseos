@@ -4,7 +4,7 @@ const dbconnect = require('./config');
 const ModelUser = require('./museumModel');
 const app = express();
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
 const router = express.Router();
 
