@@ -8,11 +8,6 @@ const PORT = process.env.PORT || 3000;
 
 const router = express.Router();
 
-//Rutas estaticas
-
-app.use(express.static(path.join(__dirname, 'public')));
-
-
 //Rutas crud// 
 
 //Get
