@@ -8,6 +8,14 @@
   ],
   "routes": [
     {
+      "src": "/public/(.*)",
+      "methods": ["GET"],
+      "headers": {
+        "Access-Control-Allow-Origin": "*"
+      },
+      "dest": "/public/$1"
+    },
+    {
       "src": "/museos",
       "methods": ["GET"],
       "headers": {
