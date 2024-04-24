@@ -57,6 +57,16 @@ router.delete('/museos/:id', async (req, res) => {
 app.use(express.json());
 app.use(router);
 
+// Servir archivos estáticos desde el directorio '/public'
+app.use('/public', express.static(path.join(__dirname, 'public')));
+
+app.get('/listar_museo', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'listar_museo.html'));
+});
+app.get('/agregar_museo', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'agregar_museo.html'));
+});
+
 app.listen(process.env.PORT, ()=> {
     console.log(`Servidor escuchando en puerto ${PORT}`)
 })
