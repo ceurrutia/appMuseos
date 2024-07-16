@@ -17,7 +17,7 @@ const museumSchema = new Schema({
     location: {
         type: {
             type: String,
-            enum: ['Point'],  // 'location.type' debe ser 'Point'
+            enum: ['Point'],  
             required: true
         },
         coordinates: {

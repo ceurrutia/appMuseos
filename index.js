@@ -15,6 +15,10 @@ app.use(express.static('public'));
 
 //rutas listar
 
+app.get('/', (req, res) => {
+    res.send("Home API")
+});
+
 app.get('/listar_museo', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'listar_museo.html'));
 });
